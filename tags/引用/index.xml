@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>引用 on Akelio</title>
+    <link>https://akelio-zhang.github.io/tags/%E5%BC%95%E7%94%A8/</link>
+    <description>Recent content in 引用 on Akelio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 27 Oct 2019 17:32:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://akelio-zhang.github.io/tags/%E5%BC%95%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java传值方式讨论</title>
+      <link>https://akelio-zhang.github.io/post/java%E4%BC%A0%E5%80%BC%E6%96%B9%E5%BC%8F%E8%AE%A8%E8%AE%BA/</link>
+      <pubDate>Sun, 27 Oct 2019 17:32:00 +0000</pubDate>
+      
+      <guid>https://akelio-zhang.github.io/post/java%E4%BC%A0%E5%80%BC%E6%96%B9%E5%BC%8F%E8%AE%A8%E8%AE%BA/</guid>
+      <description>Java传值方式论 起因是一次华为面试题 Java在进行函数调用时，参数时传值还是传引用？ 当时，我考虑的是Java变量只有两类，基本类型与引用类</description>
+    </item>
+    
+  </channel>
+</rss>

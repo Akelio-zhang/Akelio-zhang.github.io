@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>测试 on Akelio</title>
+    <link>https://akelio-zhang.github.io/tags/%E6%B5%8B%E8%AF%95/</link>
+    <description>Recent content in 测试 on Akelio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 01 Jun 2020 15:32:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://akelio-zhang.github.io/tags/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>系统复杂度-1</title>
+      <link>https://akelio-zhang.github.io/post/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6-1/</link>
+      <pubDate>Mon, 01 Jun 2020 15:32:00 +0000</pubDate>
+      
+      <guid>https://akelio-zhang.github.io/post/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6-1/</guid>
+      <description>0x1 Introduction 当你接手一个不熟悉的系统的时候，你可能想找一下系统文档（但是已经很久没更新了）；你可能想看一下有没有单元测试（很多根本跑不起来了）；这时</description>
+    </item>
+    
+  </channel>
+</rss>

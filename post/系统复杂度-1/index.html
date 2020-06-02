@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>系统复杂度-1 - Akelio</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="akelio" /><meta name="description" content="0x1 Introduction 当你接手一个不熟悉的系统的时候，你可能想找一下系统文档（但是已经很久没更新了）；你可能想看一下有没有单元测试（很多根本跑不起来了）；这时" /><meta name="keywords" content="todo" />
+
+
+
+<meta name="google-site-verification" content="wnsh4xwJb9PwqSVzzc9cX_g0aqmNcuT8vf56tNmYn94" />
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="https://akelio-zhang.github.io/post/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6-1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="系统复杂度-1" />
+<meta property="og:description" content="0x1 Introduction 当你接手一个不熟悉的系统的时候，你可能想找一下系统文档（但是已经很久没更新了）；你可能想看一下有没有单元测试（很多根本跑不起来了）；这时" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://akelio-zhang.github.io/post/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6-1/" />
+<meta property="article:published_time" content="2020-06-01T15:32:00+00:00" />
+<meta property="article:modified_time" content="2020-06-01T15:32:00+00:00" />
+<meta itemprop="name" content="系统复杂度-1">
+<meta itemprop="description" content="0x1 Introduction 当你接手一个不熟悉的系统的时候，你可能想找一下系统文档（但是已经很久没更新了）；你可能想看一下有没有单元测试（很多根本跑不起来了）；这时">
+<meta itemprop="datePublished" content="2020-06-01T15:32:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-06-01T15:32:00&#43;00:00" />
+<meta itemprop="wordCount" content="2993">
+
+
+
+<meta itemprop="keywords" content="系统复杂度,测试,设计模式,重构," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="系统复杂度-1"/>
+<meta name="twitter:description" content="0x1 Introduction 当你接手一个不熟悉的系统的时候，你可能想找一下系统文档（但是已经很久没更新了）；你可能想看一下有没有单元测试（很多根本跑不起来了）；这时"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Akelio</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Akelio</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">系统复杂度-1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-01 </span>
+        
+          <span class="more-meta"> 约 2993 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x1---introduction">0x1   Introduction</a></li>
+    <li><a href="#0x2-系统复杂度">0x2 系统复杂度</a></li>
+    <li><a href="#0x3-测试">0x3 测试</a></li>
+    <li><a href="#0x4-重构">0x4 重构</a></li>
+    <li><a href="#0x5-结论">0x5 结论</a></li>
+    <li><a href="#站在巨人的肩膀上">站在巨人的肩膀上</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="0x1---introduction">0x1   Introduction</h2>
+<p>当你接手一个不熟悉的系统的时候，你可能想找一下系统文档（但是已经很久没更新了）；你可能想看一下有没有单元测试（很多根本跑不起来了）；这时候，除了问同事，只能自己从几千几万行代码中开始摸索。</p>
+<p>当你开发一个新系统的时候，由于某些原因需要调整局部的逻辑，因为没有相应的单元测试，结果在移交给测试后才发现各种顾此失彼的bug出现了。</p>
+<p>当你的系统性能已经无法再满足时，又或者系统的迭代成本异常大时，此时就会可能需要重写或重构。此时，由于没有单元测试，自动化集成测试，你不得不拉上更多的同事来参与此次系统优化，以保证系统的可靠性。</p>
+<p>当你的系统需要有新的客户接入时，因为没有最新的系统文档或使用说明书，你只能电话、口头地来教别人怎么接入你的系统。</p>
+<p>上述的几个场景，都是因为系统的配套设施（文档、测试）没有同步完善，引起接入、迭代、重构的成本显著增加。这不是我们想看到的。相对地，系统的快速迭代的开发模式已经受到了广泛的认同，我们怎么在这个过程能够一直保持高效、可靠的输出呢？对于这个问题，本文尝试从系统复杂度、重构、设计模式、测试这几个角度来讨论这个问题，希望能给大家一些新的思考。</p>
+<h2 id="0x2-系统复杂度">0x2 系统复杂度</h2>
+<p>首先，算法有复杂度一说，在所有的算法课程基本都会在前1-2章围绕这个话题展开详细的定义与分析讨论。算法复杂度一般分为时间复杂度与空间复杂度，可以说是该算法解决问题的时间与空间成本。</p>
+<p>在工作上，我们维护的往往是一个系统，一个工程。一个系统的复杂度定义，似乎并不是那么容易。本章节大多数内容来源于<em>A Philosiphy of Software Designing</em>。这本书中对于系统的复杂度定义非常的实际，<strong>软件系统结构中让其变得难以理解且难以变更的部分组成了系统的复杂性</strong>。回顾本文引子部分，其实都是系统难以理解、难以修改导致的结果。</p>
+<p>这个定义相对于算法复杂度而言，显得非常主观，没有客观的评估准则，各个人的理解也会大相径庭。因此，书中进一步展开了几种复杂性症状。</p>
+<ol>
+<li>变化放大(change amplication)：当你需要改动某一个逻辑时，会涉及到多处代码变更。</li>
+<li>认知负担(cognitive load)：有时尽管只写了很少的代码，但是对于他人来说异常难以理解，请尝试将它改写成容易理解的方式。</li>
+<li>不可知(unknown unknowns)：不知道哪里有坑存在，就算BUG出现了。</li>
+</ol>
+<p>总的来说，控制住整个系统的复杂度，将是保障我们高效、可靠工作的核心。低复杂度的系统，大大降低了开发过程中的心智压力。</p>
+<h2 id="0x3-测试">0x3 测试</h2>
+<p>为什么要把测试放在靠前的位置呢？测试是将一直伴随在生产代码演进的，是软件的<strong>可靠性</strong>保证的重要工具。</p>
+<p>拿建筑工程做一个类比，设计一幢房屋时，对于设计人员，最终产出的是施工图。那么，它的设计依据是什么呢？《规范》与模型的承载能力分析。前者，描述了什么类型的结构需要怎么样的设计，这种属于基本要求。后者，通过基于物理建模软件进行专门的结构性能分析，来确保本次设计的<strong>可靠性</strong>。</p>
+<p>软件工程相比建筑工程，非常年轻，一方面没有条条框框地规则（P3C也仅仅是一些基础性条约）；另一方面，因为大部分软件工程不涉及生命财产，也可以通过快速更新来解决问题，所以导致大多数人对<strong>可靠性</strong>的关注度远不如建筑工程。先不说这样的态度容易使生产问题频发，另外也会让你的工作开展体验感相对差劲，总是在返工。</p>
+<p>因此，我们需要在注重软件的可靠性。我们的第一个工具就是（自动化）测试。好的测试，就能够有效地模拟真实地业务场景，来校验代码的正确性。好的测试，能够让新加入的开发人员更容易理解系统是如何使用的。好的测试，能够促进系统架构的合理化——高内聚低耦合。但是，好的测试代码并不容易写，因为测试代码的思考方式与一般的coding并不一样，它更像是生产代码的前置条件、运行场景。</p>
+<p>测试通常分为四个层次：单元测试（Unit Testing）、集成测试（Integration Testing）、系统测试（System Testing）、验收测试（Acceptance Testing）。其中离开发最近的是单元测试，一般覆盖的是函数以及类的功能正确性。集成测试则是对系统内部的各模块之间的协作是否正确，通常按内部接口进行覆盖测试。系统测试则是验证对外接口能否在各种情况下能够正常地运行（性能测试也属于这一层次）。验收测试属于辅助性的测试，范围也相对更广，不同的系统也会需要不同的验收测试，例如安全测试、易用性测试、兼容性测试等等。</p>
+<p>这里我们主要谈一下单元测试，因为这是所有测试的基本面，也是开发人员所需要特别关注的地方。先考虑一下是先写生产代码还是先写测试代码。第一个角度是，当然是先写生产代码了，没有生产代码怎么测试呢？第二个角度是，先写测试代码再写生产代码，因为测试代码是功能的运行场景，只有先把这些前置条件搞清楚了，才能写出正确的生产代码。也许你会说，我可以先大脑过一下基本场景，然后再写生产代码，再写测试代码，这应该是大部分人目前的方式，但是不知道你有没有发现，这种方式写出来的测试代码往往会因为前期的假设导致覆盖率很低。</p>
+<p>在2003年，Kent Beck提出了Test-Driven development（TDD）这样一种开发模式。</p>
+<blockquote>
+<ol>
+<li>添加一个测试</li>
+<li>运行所有测试，是否有失败</li>
+<li>一旦有失败的测试，就开始写生产代码，直到该测试通过为止。</li>
+<li>所有测试通过后，就必须开始写测试代码，直到有一个测试无法通过。</li>
+</ol>
+</blockquote>
+<p>可能，你会觉得这样非常耗时，但是你得明确，你在一个功能开发的耗时并不仅仅是写了那一堆生产代码而已，还包括测试、代码修复等等。所以，这种方式只是将一些顺序进行了调换，却能为最终的正确性铺垫很多。</p>
+<h2 id="0x4-重构">0x4 重构</h2>
+<p>重构与重写都是试图优化系统复杂度的方式，在不同的场景（代码状况、工期等）会选择不同的方式，但是大多时候会采用重构的方式来实现。</p>
+<p>先来看一下wikipedia对重构的定义：</p>
+<blockquote>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_programming">computer programming</a> and <a href="https://en.wikipedia.org/wiki/Software_design">software design</a>, <strong>code refactoring</strong> is the process of restructuring existing <a href="https://en.wikipedia.org/wiki/Computer_code">computer code</a>—changing the <em><a href="https://en.wikipedia.org/wiki/Decomposition_(computer_science)">factoring</a></em>—without changing its external behavior. Refactoring is intended to improve the design, structure, and/or implementation of the <a href="https://en.wikipedia.org/wiki/Software">software</a> (its <em><a href="https://en.wikipedia.org/wiki/Non-functional_requirement">non-functional</a></em> attributes), while preserving its <a href="https://en.wikipedia.org/wiki/Functional_requirement">functionality</a>. Potential advantages of refactoring may include improved code <a href="https://en.wikipedia.org/wiki/Readability">readability</a> and reduced <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">complexity</a>; these can improve the <a href="https://en.wikipedia.org/wiki/Source_code">source code</a>&rsquo;s <a href="https://en.wikipedia.org/wiki/Maintainability">maintainability</a> and create a simpler, cleaner, or more expressive internal <a href="https://en.wikipedia.org/wiki/Software_architecture">architecture</a> or <a href="https://en.wikipedia.org/wiki/Object_model">object model</a> to improve <a href="https://en.wikipedia.org/wiki/Extensibility">extensibility</a>.</p>
+</blockquote>
+<p>在系统复杂度膨胀到一定程度后，添加功能异常困难、系统变得难以理解、修改的时候，重构往往就需要开始执行，从而降低系统的复杂度，让我们能够更高效地开发、修改代码。所以重构并不是某一个开发阶段，而是一种开发工具，帮助我们提升效率。</p>
+<p>在《重构》这本书中，提到很多地坏味道，本质就是一些让系统复杂度变高的地方，你可以发现它与第二节中的那些症状很类似。</p>
+<p>这里特别想说的是，重构的过程中，其实会采用不少设计模式，但是并不能说设计模式就是万能药。设计模式是我们需要了解的，但是我们需要记住的是它们出现的目的是什么，我这里可以列举几个：</p>
+<ol>
+<li>减少继承，多采用组合的方式来丰富类的功能。</li>
+<li>面对各种功能的变更，能够将变化（影响）的范围尽可能的缩小到1个或者少量的类中。</li>
+<li>面向接口编程。</li>
+</ol>
+<h2 id="0x5-结论">0x5 结论</h2>
+<ol>
+<li>除了写好生产代码以外，我们要多多关注一些周边的工具：自动化测试、持续继承、文档等。</li>
+<li>对于一个持续迭代的系统，系统复杂度是需要重点关注的。</li>
+<li>尝试把你的测试代码前置。</li>
+<li>重构能够帮助你降低系统复杂度。</li>
+<li>三次原则：第一次做某件事时只管去做；第二次做类似的事会产生反感（蹩脚），但无论如何还是可以去做；第三次再做类似的事，你就应该重构/反思。</li>
+</ol>
+<h2 id="站在巨人的肩膀上">站在巨人的肩膀上</h2>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Software_testing#Testing_levels">https://en.wikipedia.org/wiki/Software_testing#Testing_levels</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Code_refactoring">https://en.wikipedia.org/wiki/Code_refactoring</a></li>
+<li>Ousterhout, John. <em>A Philosophy of Software Design</em>. Yaknyam Press, 2018.</li>
+<li>Fowler, Martin. <em>Refactoring: improving the design of existing code</em>. Addison-Wesley Professional, 2018.</li>
+<li>Martin, Robert C. <em>The clean coder: a code of conduct for professional programmers</em>. Pearson Education, 2011.</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">akelio</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-06-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6/">系统复杂度</a>
+          <a href="/tags/%E6%B5%8B%E8%AF%95/">测试</a>
+          <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+          <a href="/tags/%E9%87%8D%E6%9E%84/">重构</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/plan/">
+            <span class="next-text nav-default">2020 Upgrade Plan</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Akelio-zhang" class="iconfont icon-github" title="github"></a>
+  <a href="https://akelio-zhang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">akelio</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-151942003-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
